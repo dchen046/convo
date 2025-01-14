@@ -1,0 +1,24 @@
+# Node.js dependencies
+node_modules/
+
+# Environment variables (contains sensitive information)
+.env
+
+# Logs
+*.log
+logs/
+
+# Build directories (for projects with build steps)
+dist/
+build/
+
+# Editor directories and files
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
