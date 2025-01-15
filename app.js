@@ -13,6 +13,13 @@ const __dirname = path.dirname(__filename);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+// for public assets
+app.use(express.static(__dirname + '/public'));
+// for bootstrap
+app.use(
+    express.static(path.join(__dirname, "node_modules/bootstrap/dist/"))
+);
+
 
 app.use((err, req, res, next) => {
     console.error(err);
