@@ -3,11 +3,16 @@
 
 <head>
     <title>Homepage</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 </head>
 
 <body>
-    hello this is the index
+    <main>
+        <div class="window d-flex align-items-center justify-content-center">
+            <%-include('loginForm'); %>
+        </div>
+    </main>
 </body>
 
 </html>
