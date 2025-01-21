@@ -45,7 +45,8 @@ const loginRouter = Router();
 
 loginRouter.post('/', passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: '/'
+    failureRedirect: '/',
+    failureFlash: true
 }));
 
 export default loginRouter;
