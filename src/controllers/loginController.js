@@ -1,7 +1,6 @@
 import { body, validationResult } from 'express-validator';
-import expressAsyncHandler from "express-async-handler";
-import dotenv from 'dotenv'
-
+import { getUser } from '../db/queries.js';
+import bcrypt from 'bcryptjs';
 const validateLogin = [
     body('username')
         .notEmpty()
@@ -10,9 +9,17 @@ const validateLogin = [
         .withMessage('Username must contain letters')
 ];
 
+const dbLoginCheck = async (req) => {
+    const username = req.body.username.toLowerCase();
+    const password = req.body.password;
+    const { rows } = await getUser(username);
+    const user = rows[0];
+    return await bcrypt.compare(password, user.password);
+}
+
 export const login = [
     validateLogin,
-    (req, res) => {
+    async (req, res) => {
         console.log('validate login')
         const errors = validationResult(req);
 
@@ -23,14 +30,10 @@ export const login = [
             });
         }
 
-        const username = req.body.username;
-        const password = req.body.password;
-        console.log(`user: ${username}`);
-        console.log(`pass: ${password}`);
-        if (username === process.env.USERNAME && password === process.env.PASSWORD) {
-            res.redirect('/success')
+        if (await dbLoginCheck(req)) {
+            res.redirect('/success');
         } else {
-            res.redirect('fail');
+            res.redirect('/fail');
         }
     }
 ]
