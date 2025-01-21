@@ -1,12 +1,15 @@
+import 'dotenv/config'
 import express from 'express';
 import path from 'node:path';
 import { fileURLToPath } from 'url';
 import indexRouter from "./src/routes/indexRouter.js";
-import dotenv from 'dotenv';
-import validateRouter from './src/routes/validateRouter.js';
+import loginRouter from './src/routes/loginRouter.js';
 import successRouter from './src/routes/successRouter.js';
+import signupRouter from './src/routes/signupRouter.js';
+import session from 'express-session';
+import passport from 'passport';
+import flash from 'express-flash';
 
-dotenv.config();
 const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -23,21 +26,46 @@ app.use(
     express.static(path.join(__dirname, "node_modules/bootstrap/dist/"))
 );
 
-app.use(express.json());    //this
-app.use(express.urlencoded({extended:false})); 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.use((err, req, res, next) => {
     console.error(err);
     res.status(err.statusCode || 500).send(err.message);
 });
 
+// sessions
+app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+app.use((req, res, next) => {
+    console.log(req.session);
+    console.log(req.user);
+    next();
+})
+
 // app routers
 app.use('/', indexRouter);
-app.use('/validate', validateRouter);
-app.use('/success', successRouter)
-app.use('/fail', (req, res) => {
-    res.render('fail')
-})
+app.use('/login', loginRouter);
+app.use("/sign-up", signupRouter);
+// app.use('/success', successRouter)
+// app.use('/fail', (req, res) => {
+//     res.render('fail')
+// })
+
+
+
+
+app.get("/log-out", (req, res, next) => {
+    req.logout((err) => {
+        if (err) {
+            return next(err);
+        }
+        res.redirect("/");
+    });
+});
 
 
 // app port listener

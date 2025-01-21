@@ -9,8 +9,17 @@
 
 <body>
     <main>
-        <div class="window d-flex align-items-center justify-content-center">
-            <%-include('loginForm'); %>
+        <div class="window d-flex flex-column align-items-center justify-content-center">
+            <% if (messages) { %>
+                <%= messages.error %>
+            <% } %>
+            <% if (!locals.user) { %>
+                <%-include('login-form'); %>
+            <% } else { %>
+                <h1>WELCOME BACK <%= user.username %></h1>
+                <a href="/log-out">LOG OUT</a>
+            <% } %>
+            
         </div>
     </main>
 </body>
