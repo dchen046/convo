@@ -5,7 +5,9 @@ const homeRouter = Router();
 
 homeRouter.get('/', 
     async (req, res) => {
-        res.render('home', { user: req.user})
+        const { rows } = await getMessages(req.user.username);
+
+        res.render('home', { user: req.user, entries: rows});
 });
 
 homeRouter.post('/', 

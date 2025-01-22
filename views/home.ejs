@@ -19,7 +19,7 @@
                 <div class="d-flex flex-column align-items-center">
                     <a class="btn btn-success" href="/add-entry">Add Entry</a>
                     <% if (locals.entries) { %>
-                        <%-include('message-board', {entries: entries}) %>
+                        <%-include('message-board', { entries: entries }); %>
                     <% } %>
                 </div>
             <% } else { %>

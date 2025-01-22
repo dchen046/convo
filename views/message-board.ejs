@@ -1,7 +1,6 @@
-<div>
-    <h1>Entries</h1>
+<h1>Entries</h1>
+<div class="message-board">
     <% entries.forEach((entry) => { %>
-        <p><%= entry.username %></p>
-        <p><%= entry.entry %></p>
+        <%-include('entry-card', { entry : entry }); %>
     <% }); %> 
 </div>
