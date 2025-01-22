@@ -30,7 +30,7 @@ export const signup = [
             const username = req.body.username;
             const password = req.body.password;
             if (await createUser(username, password)) {
-                console.log(result);
+                // console.log(result);
             } else {
                 console.log('no result')
             }
