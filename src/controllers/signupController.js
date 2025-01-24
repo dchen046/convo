@@ -30,9 +30,9 @@ export const signup = [
             const username = req.body.username;
             const password = req.body.password;
             if (await createUser(username, password)) {
-                // console.log(result);
+                res.redirect('/');
             } else {
-                console.log('no result')
+                console.log('no result');
             }
         } else {
             console.log('bad code');
