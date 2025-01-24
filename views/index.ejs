@@ -11,7 +11,7 @@
     <main>
         <div class="window d-flex flex-column align-items-center justify-content-center">
             <% if (messages) { %>
-                <%= messages.error %>
+                <p class="error"> <%= messages.error %>  </p>
             <% } %>
             <%-include('login-form'); %>
         </div>

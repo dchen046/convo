@@ -1,11 +1,12 @@
 <div class="btest entry-card">
     <div class="d-flex justify-content-between">
         <p>
-            <%= entry.username %>
+            User : <%= entry.username %>
         </p>
         <p>
             entry #: <%= entry.e_id %>
         </p>
+        <a href='/entry/delete/<%= entry.e_id %>' class="btn btn-danger">Remove</a>
     </div>
     <div>
         <p> <%= entry.entry %></p>

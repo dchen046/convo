@@ -55,7 +55,7 @@ app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use("/sign-up", signupRouter);
 app.use('/home', homeRouter)
-app.use('/add-entry', entryRouter);
+app.use('/entry', entryRouter);
 // app.use('/success', successRouter)
 // app.use('/fail', (req, res) => {
 //     res.render('fail')

@@ -48,11 +48,18 @@ async function getMessages(username) {
     return await pool.query(query, values);
 }
 
+async function deleteMessage(id) {
+    const query = 'DELETE FROM messages WHERE e_id = $1';
+    const values = [id];
+    return await pool.query(query, values);
+}
+
 export {
     getAllUsernames,
     createUser,
     getUser,
     getUserById,
     getMessages,
-    createMessage
+    createMessage,
+    deleteMessage
 };

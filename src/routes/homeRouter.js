@@ -1,16 +1,20 @@
 import { Router } from "express";
-import { getMessages, createMessage } from "../db/queries.js";
+import { getMessages, createMessage, deleteMessage } from "../db/queries.js";
 
 const homeRouter = Router();
 
-homeRouter.get('/', 
+homeRouter.get('/',
     async (req, res) => {
-        const { rows } = await getMessages(req.user.username);
+        if (req.user) {
+            const { rows } = await getMessages(req.user.username);
+            res.render('home', { user: req.user, entries: rows });
+        } else {
+            console.log(false);
+            res.render('home', { user: false });
+        }
+    });
 
-        res.render('home', { user: req.user, entries: rows});
-});
-
-homeRouter.post('/', 
+homeRouter.post('/',
     async (req, res) => {
         const entry = req.body.entry;
         const username = req.user.username;
@@ -18,7 +22,7 @@ homeRouter.post('/',
 
         const { rows } = await getMessages(req.user.username);
 
-        res.render('home', { user: req.user, entries: rows});
+        res.render('home', { user: req.user, entries: rows });
     }
 )
 
