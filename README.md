@@ -1,5 +1,7 @@
 Convo is a application where users can write private journal entries and have it saved on their local devices.
 
+It utilizes RESTful apis to create, delete, and update entries on the database.
+
 ## Technologies Used
 - Backend : Express.js
 - Databsae : PostgresSQL
