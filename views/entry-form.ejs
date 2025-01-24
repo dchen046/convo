@@ -1,0 +1,29 @@
+<!-- index.ejs -->
+<html>
+
+<head>
+    <title>Homepage</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+</head>
+
+<body>
+    <main>
+        <div class="window d-flex flex-row justify-content-center align-items-center">
+            <form class="text-center" action="/home" method="POST">
+                <h4>Entry</h4>
+
+
+                <div class="form-floating mt-3 mb-3">
+                    <textarea class="textarea-form form-control" placeholder="Leave a comment here" id="entry" name="entry" cols="75"></textarea>
+                    <label for="entry">Entry</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-50 mb-3">Submit</button>
+            </form>
+        </div>
+        </div>
+    </main>
+</body>
+
+</html>

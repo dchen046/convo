@@ -44,7 +44,7 @@ passport.deserializeUser(async (id, done) => {
 const loginRouter = Router();
 
 loginRouter.post('/', passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: 'home',
     failureRedirect: '/',
     failureFlash: true
 }));

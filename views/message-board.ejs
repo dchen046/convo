@@ -1,0 +1,6 @@
+<h1>Entries</h1>
+<div class="message-board">
+    <% entries.reverse().forEach((entry) => { %>
+        <%-include('entry-card', { entry : entry }); %>
+    <% }); %> 
+</div>

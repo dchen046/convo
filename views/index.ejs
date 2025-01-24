@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Homepage</title>
+    <title>Login</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 </head>
@@ -11,15 +11,9 @@
     <main>
         <div class="window d-flex flex-column align-items-center justify-content-center">
             <% if (messages) { %>
-                <%= messages.error %>
+                <p class="error"> <%= messages.error %>  </p>
             <% } %>
-            <% if (!locals.user) { %>
-                <%-include('login-form'); %>
-            <% } else { %>
-                <h1>WELCOME BACK <%= user.username %></h1>
-                <a href="/log-out">LOG OUT</a>
-            <% } %>
-            
+            <%-include('login-form'); %>
         </div>
     </main>
 </body>

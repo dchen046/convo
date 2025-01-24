@@ -2,13 +2,16 @@ import 'dotenv/config'
 import express from 'express';
 import path from 'node:path';
 import { fileURLToPath } from 'url';
-import indexRouter from "./src/routes/indexRouter.js";
-import loginRouter from './src/routes/loginRouter.js';
-import successRouter from './src/routes/successRouter.js';
-import signupRouter from './src/routes/signupRouter.js';
+
 import session from 'express-session';
 import passport from 'passport';
 import flash from 'express-flash';
+
+import indexRouter from "./src/routes/indexRouter.js";
+import loginRouter from './src/routes/loginRouter.js';
+import signupRouter from './src/routes/signupRouter.js';
+import homeRouter from './src/routes/homeRouter.js';
+import entryRouter from './src/routes/entryRouter.js';
 
 const app = express();
 
@@ -36,20 +39,23 @@ app.use((err, req, res, next) => {
 
 // sessions
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash());
 
-app.use((req, res, next) => {
-    console.log(req.session);
-    console.log(req.user);
-    next();
-})
+
+// app.use((req, res, next) => {
+//     console.log(req.session);
+//     console.log(req.user);
+//     next();
+// })
 
 // app routers
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use("/sign-up", signupRouter);
+app.use('/home', homeRouter)
+app.use('/entry', entryRouter);
 // app.use('/success', successRouter)
 // app.use('/fail', (req, res) => {
 //     res.render('fail')
